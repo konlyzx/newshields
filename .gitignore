@@ -11,3 +11,4 @@ build
 pids
 .pm2
 *.tar.gz
+*.bak
