@@ -162,11 +162,8 @@ GET /api/badge.svg?label={label}&title={title}&icon={icon}&theme={theme}
 <div align="center">
 
 <p>
-  <a href="https://twitter.com/newshields">
-    <img src="https://img.shields.io/badge/𝕏%20Twitter-000000?style=flat&logo=x&logoColor=white" alt="Twitter" />
-  </a>
-  <a href="https://github.com/konlyzx/newshields">
-    <img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white" alt="GitHub" />
+  <a href="https://newshields.vercel.app/">
+    <img src="https://newshields.vercel.app/api/badge.svg?label=OUT%20NOW&title=New%20Shields&icon=newshields&theme=graphite" alt="Get Start" />
   </a>
 </p>
 
