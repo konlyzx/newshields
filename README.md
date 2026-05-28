@@ -36,20 +36,14 @@
 <div align="center">
 
 <p>
-  <img src="https://newshields.vercel.app/api/badge.svg?label=framework&title=Svelte&icon=svelte&theme=sunset&compact=true" alt="SvelteKit" />
-  <img src="https://newshields.vercel.app/api/badge.svg?label=Language&title=TypeScript&icon=typescript&theme=midnight&compact=true" alt="TypeScript" />
-  <img src="https://newshields.vercel.app/api/badge.svg?label=Deployed%20on%20&title=Vercel&icon=vercel_dark&theme=graphite&compact=true" alt="Vercel" />
-  <img src="https://newshields.vercel.app/api/badge.svg?label=api&title=Hono&icon=hono&theme=sunset&compact=true" alt="Hono" />
-  <img src="https://newshields.vercel.app/api/badge.svg?label=api&title=Upstash&icon=upstash&theme=forest&compact=true" alt="Upstash" />
-  <a href="https://github.com/konlyzx/newshields/stargazers">
-    <img src="https://newshields.vercel.app/api/badge.svg?label=stars&icon=github&theme=graphite&compact=true" alt="GitHub stars" />
-  </a>
-  <a href="https://github.com/konlyzx/newshields/forks">
-    <img src="https://newshields.vercel.app/api/badge.svg?label=forks&icon=github&theme=graphite&compact=true" alt="GitHub forks" />
-  </a>
-  <a href="https://github.com/konlyzx/newshields/issues">
-    <img src="https://newshields.vercel.app/api/badge.svg?label=issues&icon=github&theme=graphite&compact=true" alt="GitHub issues" />
-  </a>
+  <img src="https://newshields.vercel.app/api/badge.svg?label=framework&title=Svelte&icon=svelte&theme=sunset&compact=true" alt="SvelteKit" height="40" />
+  <img src="https://newshields.vercel.app/api/badge.svg?label=Language&title=TypeScript&icon=typescript&theme=midnight&compact=true" alt="TypeScript" height="40" />
+  <img src="https://newshields.vercel.app/api/badge.svg?label=Deployed%20on&title=Vercel&icon=vercel_dark&theme=graphite&compact=true" alt="Vercel" height="40" />
+  <img src="https://newshields.vercel.app/api/badge.svg?label=api&title=Hono&icon=hono&theme=sunset&compact=true" alt="Hono" height="40" />
+  <img src="https://newshields.vercel.app/api/badge.svg?label=api&title=Upstash&icon=upstash&theme=forest&compact=true" alt="Upstash" height="40" />
+  <a href="https://github.com/konlyzx/newshields/stargazers"><img src="https://newshields.vercel.app/api/badge.svg?label=stars&icon=github&theme=graphite&compact=true" alt="GitHub stars" height="40" /></a>
+  <a href="https://github.com/konlyzx/newshields/forks"><img src="https://newshields.vercel.app/api/badge.svg?label=forks&icon=github&theme=graphite&compact=true" alt="GitHub forks" height="40" /></a>
+  <a href="https://github.com/konlyzx/newshields/issues"><img src="https://newshields.vercel.app/api/badge.svg?label=issues&icon=github&theme=graphite&compact=true" alt="GitHub issues" height="40" /></a>
 </p>
 
 </div>
