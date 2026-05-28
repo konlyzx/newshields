@@ -44,9 +44,15 @@
 </p>
 
 <p>
-  <img src="https://img.shields.io/github/stars/konlyzx/newshields?style=flat&logo=github&logoColor=white&color=181717" alt="GitHub stars" />
-  <img src="https://img.shields.io/github/forks/konlyzx/newshields?style=flat&logo=github&logoColor=white&color=181717" alt="GitHub forks" />
-  <img src="https://img.shields.io/github/issues/konlyzx/newshields?style=flat&logo=github&logoColor=white&color=181717" alt="GitHub issues" />
+  <a href="https://github.com/konlyzx/newshields/stargazers">
+    <img src="https://newshields.vercel.app/api/badge.svg?label=stars&icon=github&theme=graphite" alt="GitHub stars" />
+  </a>
+  <a href="https://github.com/konlyzx/newshields/forks">
+    <img src="https://newshields.vercel.app/api/badge.svg?label=forks&icon=github&theme=graphite" alt="GitHub forks" />
+  </a>
+  <a href="https://github.com/konlyzx/newshields/issues">
+    <img src="https://newshields.vercel.app/api/badge.svg?label=issues&icon=github&theme=graphite" alt="GitHub issues" />
+  </a>
 </p>
 
 </div>

@@ -6,6 +6,7 @@ import {
   type BadgeParams
 } from '$lib/server/badge-svg';
 import { getBadgeRatelimiter, getClientIdentifier, type UpstashEnv } from '$lib/server/upstash';
+import { getGitHubStats, formatNumber } from '$lib/server/github-stats';
 
 type AppEnv = {
   Bindings: UpstashEnv;
@@ -35,12 +36,24 @@ app.get('/api/badge.svg', async (c) => {
   }
 
   const url = new URL(c.req.url);
-  const params: BadgeParams = sanitizeBadgeParams({
+  let params: BadgeParams = sanitizeBadgeParams({
     label: url.searchParams.get('label'),
     title: url.searchParams.get('title'),
     icon: url.searchParams.get('icon'),
     theme: url.searchParams.get('theme')
   });
+
+  // Handle GitHub metrics: inject real values if label is stars/forks/issues
+  const labelLower = params.label.toLowerCase();
+  if (['stars', 'forks', 'issues'].includes(labelLower)) {
+    const stats = await getGitHubStats();
+    let value: number;
+    if (labelLower === 'stars') value = stats.stargazers_count;
+    else if (labelLower === 'forks') value = stats.forks_count;
+    else value = stats.open_issues_count;
+    
+    params.title = formatNumber(value);
+  }
 
   const svg = await renderBadgeSvg(params);
 
