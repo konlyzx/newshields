@@ -158,7 +158,7 @@ GET /api/badge.svg?label={label}&title={title}&icon={icon}&theme={theme}
 
 ## 🔑 License
 
-[MIT](LICENSE) © 2026 [Your Name]
+[MIT](LICENSE) © 2026 Kevin Cheni
 
 ---
 
