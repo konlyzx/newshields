@@ -5,12 +5,7 @@ const config = {
   extensions: ['.svelte'],
   preprocess: [vitePreprocess()],
   kit: {
-    adapter: adapter({
-      routes: {
-        include: ['/*'],
-        exclude: ['<all>']
-      }
-    }),
+    adapter: adapter(),
     alias: {
       $content: 'src/content'
     }
