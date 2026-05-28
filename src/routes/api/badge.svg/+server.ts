@@ -7,6 +7,7 @@ import {
 } from '$lib/server/badge-svg';
 import { getBadgeRatelimiter, getClientIdentifier, type UpstashEnv } from '$lib/server/upstash';
 import { getGitHubStats, formatNumber } from '$lib/server/github-stats';
+import { COMPACT_BADGE_DIMENSIONS } from '$lib/config/badge';
 
 type AppEnv = {
   Bindings: UpstashEnv;
@@ -45,7 +46,9 @@ app.get('/api/badge.svg', async (c) => {
 
   // Handle GitHub metrics: inject real values if label is stars/forks/issues
   const labelLower = params.label.toLowerCase();
+  let isCompact = false;
   if (['stars', 'forks', 'issues'].includes(labelLower)) {
+    isCompact = true;
     const stats = await getGitHubStats();
     let value: number;
     if (labelLower === 'stars') value = stats.stargazers_count;
@@ -53,9 +56,10 @@ app.get('/api/badge.svg', async (c) => {
     else value = stats.open_issues_count;
     
     params.title = formatNumber(value);
+    console.log(`[GitHub Stats] ${labelLower}: ${value}`);
   }
 
-  const svg = await renderBadgeSvg(params);
+  const svg = await renderBadgeSvg(params, isCompact);
 
   return new Response(svg, {
     status: 200,

@@ -1,4 +1,4 @@
-import { BADGE_DIMENSIONS, BADGE_LIMITS } from '$lib/config/badge';
+import { BADGE_DIMENSIONS, COMPACT_BADGE_DIMENSIONS, BADGE_LIMITS } from '$lib/config/badge';
 import { getIcon, isLocalOnly } from '$content/icons';
 import { getTheme } from '$content/themes';
 import type { BadgeParams } from '$lib/utils/badge-url';
@@ -38,9 +38,13 @@ export function sanitizeBadgeParams(raw: Partial<Record<keyof BadgeParams, strin
   const title = sanitize(raw.title, BADGE_LIMITS.defaultTitle, BADGE_LIMITS.titleMaxLength);
   const icon = (raw.icon ?? BADGE_LIMITS.defaultIcon).toLowerCase().replace(/[^a-z0-9_-]/g, '');
   const theme = (raw.theme ?? BADGE_LIMITS.defaultTheme).toLowerCase().replace(/[^a-z0-9-]/g, '');
+  
+  // For GitHub metrics (stars/forks/issues), allow empty title to be filled later
+  const isGitHubMetric = ['stars', 'forks', 'issues'].includes(label.toLowerCase());
+  
   return {
     label: label || BADGE_LIMITS.defaultLabel,
-    title: title || BADGE_LIMITS.defaultTitle,
+    title: isGitHubMetric ? (title || '') : (title || BADGE_LIMITS.defaultTitle),
     icon: icon || BADGE_LIMITS.defaultIcon,
     theme: theme || BADGE_LIMITS.defaultTheme
   };
@@ -64,9 +68,10 @@ function escapeXml(value: string): string {
     .replace(/'/g, '&apos;');
 }
 
-export async function renderBadgeSvg(params: BadgeParams): Promise<string> {
+export async function renderBadgeSvg(params: BadgeParams, compact = false): Promise<string> {
   const theme = getTheme(params.theme);
-  const { width, height, padding, iconSize, borderRadius } = BADGE_DIMENSIONS;
+  const dimensions = compact ? COMPACT_BADGE_DIMENSIONS : BADGE_DIMENSIONS;
+  const { width, height, padding, iconSize, borderRadius } = dimensions;
 
   const labelText = escapeXml(params.label);
   const titleText = escapeXml(params.title);
