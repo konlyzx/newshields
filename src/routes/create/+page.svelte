@@ -41,6 +41,7 @@
     type SvglIcon
   } from '$lib/utils/svgl';
   import { cn } from '$lib/utils/style';
+  import { getIcon } from '$content/icons';
   import { fetchGitHubStars, formatStars } from '$lib/utils/github-stars';
 
   let starCount = $state(0);
@@ -170,7 +171,6 @@
       const raw = localStorage.getItem('newshields:favorites');
       if (raw) favorites = JSON.parse(raw) as Favorite[];
     } catch {
-      // ignore
     }
     favoritesReady = true;
 
@@ -178,9 +178,17 @@
 
     try {
       iconLoading = true;
-      iconPopular = await svglList({ limit: 24 });
+      const svglIcons = await svglList({ limit: 24 });
+      // Add New Shields icon at the beginning
+      const newshieldsIcon: SvglIcon = {
+        id: 900000,
+        title: 'New Shields',
+        category: 'generic',
+        route: '/api/icon.svg?slug=newshields',
+        url: ''
+      };
+      iconPopular = [newshieldsIcon, ...svglIcons];
     } catch {
-      // ignore
     } finally {
       iconLoading = false;
     }
@@ -191,7 +199,6 @@
     try {
       localStorage.setItem('newshields:favorites', JSON.stringify(favorites));
     } catch {
-      // ignore
     }
   });
 
@@ -215,10 +222,21 @@
         const ctrl = new AbortController();
         searchCtrl = ctrl;
         try {
+          // Search SVGL icons
           const r = await svglSearch(q, ctrl.signal);
-          if (!ctrl.signal.aborted) iconResults = r.slice(0, 100);
+          // Check if query matches New Shields
+          const matchesNewshields = 'new shields'.includes(q.toLowerCase()) || 'newshields'.includes(q.toLowerCase());
+          const newshieldsResult: SvglIcon[] = matchesNewshields ? [{
+            id: 900000,
+            title: 'New Shields',
+            category: 'generic',
+            route: '/api/icon.svg?slug=newshields',
+            url: ''
+          }] : [];
+          if (!ctrl.signal.aborted) {
+            iconResults = [...newshieldsResult, ...r].slice(0, 100);
+          }
         } catch {
-          // ignore
         } finally {
           if (!ctrl.signal.aborted) iconLoading = false;
         }
@@ -241,11 +259,21 @@
   });
 
   function setIconAndTitle(i: SvglIcon): void {
-    icon = svglSlug(i);
+    if (typeof i.route === 'string' && i.route.includes('/api/icon.svg?slug=')) {
+      const match = i.route.match(/slug=([^&]+)/);
+      icon = match ? match[1] : svglSlug(i);
+    } else {
+      icon = svglSlug(i);
+    }
     title = i.title;
   }
   function selectIconOnly(i: SvglIcon): void {
-    icon = svglSlug(i);
+    if (typeof i.route === 'string' && i.route.includes('/api/icon.svg?slug=')) {
+      const match = i.route.match(/slug=([^&]+)/);
+      icon = match ? match[1] : svglSlug(i);
+    } else {
+      icon = svglSlug(i);
+    }
   }
   function toggleFavorite(i: SvglIcon): void {
     const slug = svglSlug(i);
@@ -417,8 +445,9 @@
       </button>
       <button
         type="button"
-        onclick={() => copy(markdown, 'Markdown')}
-        class="ml-0.5 inline-flex h-8 items-center gap-2 rounded-full bg-gradient-to-br from-violet-500 to-violet-600 px-3.5 text-xs font-medium text-white shadow-[0_4px_20px_-4px_rgba(140,90,255,0.6)] ring-1 ring-violet-400/30 transition hover:from-violet-400 hover:to-violet-500"
+        disabled
+        title="Coming soon: Community publishing will be available in future updates"
+        class="ml-0.5 inline-flex h-8 cursor-not-allowed items-center gap-2 rounded-full bg-white/[0.04] px-3.5 text-xs font-medium text-white/40 ring-1 ring-white/10"
       >
         <Copy class="h-3.5 w-3.5" />
         Publish

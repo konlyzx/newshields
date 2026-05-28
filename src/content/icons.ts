@@ -132,6 +132,13 @@ const icons = [
     name: 'Terminal',
     category: 'tool',
     path: 'M20 4H4c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM5.5 16l-1.41-1.41L6.67 12 4.09 9.41 5.5 8l4 4-4 4zM18 16h-7v-2h7v2z'
+  },
+  {
+    id: 'newshields',
+    name: 'New Shields',
+    category: 'generic',
+    viewBox: '0 0 156 153',
+    path: 'M105.599 129.606L19.4054 47.8906L24.7527 42.8212L110.947 124.536L105.599 129.606ZM52.2533 129.606L19.4054 98.3439L24.7527 93.2745L57.7279 124.536L52.2533 129.606ZM49.4007 21.4843L135.595 103.199L130.247 108.269L44.0534 26.5538L49.4007 21.4843ZM102.747 21.4843L135.595 52.746L130.247 57.8155L97.2721 26.5538L102.747 21.4843Z'
   }
 ] as const satisfies readonly BadgeIcon[];
 
@@ -167,7 +174,8 @@ const LOCAL_ONLY = new Set<string>([
   'terminal',
   'code',
   'lightning',
-  'database'
+  'database',
+  'newshields'
 ]);
 
 export function isLocalOnly(id: string | null | undefined): boolean {
