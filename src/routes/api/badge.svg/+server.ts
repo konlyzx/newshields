@@ -44,11 +44,12 @@ app.get('/api/badge.svg', async (c) => {
     theme: url.searchParams.get('theme')
   });
 
+  // Handle compact mode from URL parameter
+  const isCompact = url.searchParams.get('compact') === 'true';
+
   // Handle GitHub metrics: inject real values if label is stars/forks/issues
   const labelLower = params.label.toLowerCase();
-  let isCompact = false;
   if (['stars', 'forks', 'issues'].includes(labelLower)) {
-    isCompact = true;
     const stats = await getGitHubStats();
     let value: number;
     if (labelLower === 'stars') value = stats.stargazers_count;
